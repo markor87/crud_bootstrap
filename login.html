@@ -8,52 +8,16 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/login.css">
     <script src="js/login_validation.js"></script>
-    <style>
-        /* Add some spacing and a border to the form */
-        form {
-            padding: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
 
-        /* Style the submit button */
-        button[type="submit"] {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
 
-        /* Add some hover effects to the submit button */
-        button[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-        /* Style the "Forgot password?" and "Sign up" links */
-        a {
-            color: #00bcd4;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        #emailHelp {
-            display: none;
-        }
-
-        #passwordHelp {
-            display: none;
-        }
-
-    </style>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.16.6/dist/umd/popper.min.js">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+                integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"></script>
 
     <title>Login Form</title>
 </head>
@@ -62,7 +26,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
             <h1 class="text-center mb-3">Login</h1>
-            <form onsubmit="return validateForm()">
+            <form onsubmit="return validateForm()" id="loginForm">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
@@ -90,14 +54,5 @@
         </div>
     </div>
 </div>
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.16.6/dist/umd/popper.min.js">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"></script>
 </body>
 </html>

@@ -1,0 +1,42 @@
+/* Add some spacing and a border to the form */
+form {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style the submit button */
+button[type="submit"] {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+/* Add some hover effects to the submit button */
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Style the "Forgot password?" and "Sign up" links */
+a {
+    color: #00bcd4;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#emailHelp {
+    display: none;
+}
+
+#passwordHelp {
+    display: none;
+}

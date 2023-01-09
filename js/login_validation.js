@@ -20,5 +20,5 @@ function validateForm() {
     }
 
     // If the email and password fields are not empty, submit the form
-    return false;
+    return true;
 }
