@@ -1,58 +1,103 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="js/login_validation.js"></script>
     <style>
-        /* Make the table the same width as the monitor */
-        .table {
-            width: 100%;
+        /* Add some spacing and a border to the form */
+        form {
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
 
-        /* Make the navbar and fonts more modern */
-        .navbar {
-            font-family: 'Roboto', sans-serif;
-            background-color: #333333;
+        /* Style the submit button */
+        button[type="submit"] {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
         }
 
-        .nav-link {
-            color: #ffffff;
+        /* Add some hover effects to the submit button */
+        button[type="submit"]:hover {
+            background-color: #45a049;
         }
 
-        .nav-link:hover {
-            color: #cccccc;
+        /* Style the "Forgot password?" and "Sign up" links */
+        a {
+            color: #00bcd4;
         }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        #emailHelp {
+            display: none;
+        }
+
+        #passwordHelp {
+            display: none;
+        }
+
     </style>
+
+    <title>Login Form</title>
 </head>
 <body>
-<!-- Login Form -->
-<form class="mx-auto mt-5 p-4 border border-secondary rounded" style="max-width: 400px;" id="login-form">
-    <h2 class="text-center mb-4">Login</h2>
-    <div class="form-group">
-        <label for="emailInput">Email</label>
-        <input type="text" class="form-control" id="emailInput" placeholder="Enter email" >
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <h1 class="text-center mb-3">Login</h1>
+            <form onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                        else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password">
+                    <small id="passwordHelp" class="form-text text-muted">We'll never share your email with anyone
+                        else.</small>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-4">Login</button>
+            </form>
+            <div class="text-center mt-3">
+                <a href="#" class="text-primary">Forgot password?</a>
+            </div>
+            <div class="text-center mt-3">
+                Don't have an account? <a href="#" class="text-primary">Sign up</a>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="passwordInput">Password</label>
-        <input type="password" class="form-control" id="passwordInput" placeholder="Enter password" >
-    </div>
-    <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="rememberCheckbox">
-        <label class="form-check-label" for="rememberCheckbox">Remember me</label>
-    </div>
-    <button type="submit" class="btn btn-primary btn-block">Login</button>
-    <div class="text-center mt-3">
-        <a href="/register" class="btn btn-link" id="register">Register</a>
-        <a href="/reset_password" class="btn btn-link" id="reset-password">Reset password</a>
-    </div>
-</form>
+</div>
 
-
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.16.6/dist/umd/popper.min.js">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"></script>
 </body>
 </html>
