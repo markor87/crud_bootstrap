@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Title</title>
+    <script src="js/login_validation.js"></script>
+    <style>
+        /* Make the table the same width as the monitor */
+        .table {
+            width: 100%;
+        }
+
+        /* Make the navbar and fonts more modern */
+        .navbar {
+            font-family: 'Roboto', sans-serif;
+            background-color: #333333;
+        }
+
+        .nav-link {
+            color: #ffffff;
+        }
+
+        .nav-link:hover {
+            color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+<!-- Login Form -->
+<form class="mx-auto mt-5 p-4 border border-secondary rounded" style="max-width: 400px;" id="login-form">
+    <h2 class="text-center mb-4">Login</h2>
+    <div class="form-group">
+        <label for="emailInput">Email</label>
+        <input type="text" class="form-control" id="emailInput" placeholder="Enter email" >
+    </div>
+    <div class="form-group">
+        <label for="passwordInput">Password</label>
+        <input type="password" class="form-control" id="passwordInput" placeholder="Enter password" >
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="rememberCheckbox">
+        <label class="form-check-label" for="rememberCheckbox">Remember me</label>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Login</button>
+    <div class="text-center mt-3">
+        <a href="/register" class="btn btn-link" id="register">Register</a>
+        <a href="/reset_password" class="btn btn-link" id="reset-password">Reset password</a>
+    </div>
+</form>
+
+
+</body>
+</html>
