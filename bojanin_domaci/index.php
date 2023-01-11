@@ -125,24 +125,26 @@ function calculateGradeStatistics($arr)
 // Primer korišćenja klasa
 $predmet = new Predmet("Programiranje");
 $predmet2 = new Predmet("Pravo");
-$student1 = new MasterStudent("Marko", "1", "Master Thesis Title");
-$student2 = new MasterStudent("Bojana", "2", "Master Thesis Title 2");
+$student1 = new MasterStudent("Marko", "1", "Napredno PHP programiranje");
+$student2 = new MasterStudent("Bojana", "2", "Rimsko pravo");
 
-$predmet->addStudentGrade($student1, 8);
+$predmet->addStudentGrade($student1, 10);
 $predmet->addStudentGrade($student2, 7);
-$predmet2->addStudentGrade($student2, 10);
+$predmet2->addStudentGrade($student1, 10);
+$predmet2->addStudentGrade($student2, 6);
 $studentList = array($student1, $student2);
 studentList($studentList);
 
 $grades = array($predmet->getStudentGrade($student1), $predmet->getStudentGrade($student2), $predmet2->getStudentGrade($student2));
 $gradeStatistics = calculateGradeStatistics($grades);
 echo "<br>";
-echo "Max grade: " . $gradeStatistics[0] . "<br>";
-echo "Min grade: " . $gradeStatistics[1] . "<br>";
-echo "Average grade: " . $gradeStatistics[2] . "<br>";
+echo "Najveća ocena: " . $gradeStatistics[0] . "<br>";
+echo "Najmanja ocena: " . $gradeStatistics[1] . "<br>";
+echo "Prosečna ocena: " . $gradeStatistics[2] . "<br>";
 
-echo "Passing students: " . implode(", ", $predmet->getPassingStudents()) . "<br>";
-echo "Average grade for this class: " . $predmet->calculateAverageGrade() . "<br>";
+echo "ID studenata koji su položili: " . implode(", ", $predmet->getPassingStudents()) . "<br>";
+echo "Prosečna ocena za " . $predmet->getName(). " je: " . $predmet->calculateAverageGrade() . "<br>";
+echo "Prosečna ocena za " . $predmet2->getName(). " je: " . $predmet2->calculateAverageGrade();
 
 // Prikaz podataka o studentu i oceni na HTML strani
 echo "<h1>Student Information</h1>";
