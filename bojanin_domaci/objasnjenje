@@ -1,0 +1,36 @@
+Kod koji sam ti dao sadrzi:
+- 3 klase (Student, Predmet, i MasterStudent)
+- 1 interfejs (StudentData)
+- 1 apstraktnu klasu (Student)
+- Koncepte enkapsulacije (private atributi i metode za pristup atributima u klasi Student)
+- Koncepte nasleđivanja (klasa MasterStudent nasleđuje klasu Student)
+- Koncepte polimorfizma (objekat klase MasterStudent može biti korišćen kao objekat klase Student)
+- static metode i static property-je (metoda isGradePassing i static property $minPassingGrade u klasi Predmet)
+- trait (PredmetIzracunavanje)
+- Funkcije za rad sa nizovima (studentList) i matematičkim funkcijama (calculateGradeStatistics)
+- Prikaz podataka o studentu i oceni na HTML strani.
+
+
+Klase:
+Student: Apstraktna klasa koja implementira interfejs StudentData i sadrži osnovne podatke o studentu (ime i ID).
+Predmet: Klasa koja sadrži informacije o predmetu, kao što su imena predmeta i ocene studenata. Takođe sadrži metode za dodavanje i dobavljanje ocene studenata, kao i statičku metodu za proveru da li je ocena prolazna.
+MasterStudent: Klasa koja nasleđuje klasu Student i dodaje podatak o master radu.
+Interfejs:
+StudentData: Interfejs koji sadrži metode za dobavljanje imena i ID-a studenata.
+Enkapsulacija:
+Enkapsulacija se koristi da se ograniči pristup unutrašnjim atributima i metodama klase. U ovom kodu, atributi name i ID u klasi Student su označeni kao private, što znači da se njima može pristupiti samo unutar same klase. Metode getStudentName() i getStudentID() su public i služe za pristup ovim atributima.
+Nasleđivanje:
+Nasleđivanje omogućava da se jedna klasa "nasledi" od druge i da automatski preuzme njene atribute i metode. U ovom kodu, klasa MasterStudent nasleđuje klasu Student, što znači da svaki objekat klase MasterStudent automatski ima sve atribute i metode klase Student.
+Polimorfizam:
+Polimorfizam omogućava da objekat jedne klase bude korišćen kao objekat druge klase, ako druga klasa nasleđuje prvu klasu. U ovom kodu, objekat klase MasterStudent može biti korišćen kao objekat klase Student, jer MasterStudent nasleđuje Student.
+Static metode i property-ji:
+Static metode i property-ji su oni koji se mogu pozivati na nivou klase, a ne na nivou objekta. Statičke metode i property-ji su dostupni svima bez potrebe za kreiranjem objekta. U ovom kodu, metoda isGradePassing() i property $minPassingGrade su statični i mogu se pozivati bez potrebe za kreiranjem objekta klase Predmet.
+Trait:
+Trait je mehanizam za kodiranje za PHP koji omogućava da se delovi koda koji se ponavljaju između različitih klasa izdvoje u poseban blok koda i da se taj blok koda koristi u više klasa. U ovom kodu, trait PredmetIzracunavanje sadrži metode za računanje prosečne ocene i dobavljanje studenata sa prolaznom ocenom. Ove metode se mogu koristiti u klasi Predmet tako što se trait navede koristeći ključnu reč "use".
+
+                                            Rad sa nizovima:
+                                            Funkcija studentList prima niz objekata klase Student i prolazi kroz njega, ispisujući ID i ime svakog studenta.
+                                            Rad sa matematičkim funkcijama:
+                                            Funkcija calculateGradeStatistics prima niz ocena i koristi matematičke funkcije za računanje maksimalne, minimalne i prosečne ocene.
+                                            Prikaz podataka o studentu i oceni na HTML strani:
+                                            Podaci o studentu (ime, ID, i master rad) i ocena za predmet se ispisuju na HTML strani korišćenjem metoda za dobavljanje ovih podataka iz objekata klasa Student i Predmet.
