@@ -17,7 +17,7 @@ $predmet2->addStudentGrade($student2, 6);
 $studentList = array($student1, $student2);
 studentList($studentList);
 
-$grades = array($predmet->getStudentGrade($student1), $predmet->getStudentGrade($student2), $predmet2->getStudentGrade($student2));
+$grades = array($predmet->getStudentGrade($student1), $predmet->getStudentGrade($student2), $predmet2->getStudentGrade($student1), $predmet2->getStudentGrade($student2));
 $gradeStatistics = calculateGradeStatistics($grades);
 
 echo "<br>";

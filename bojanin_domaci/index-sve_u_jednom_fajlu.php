@@ -135,7 +135,7 @@ $predmet2->addStudentGrade($student2, 6);
 $studentList = array($student1, $student2);
 studentList($studentList);
 
-$grades = array($predmet->getStudentGrade($student1), $predmet->getStudentGrade($student2), $predmet2->getStudentGrade($student2));
+$grades = array($predmet->getStudentGrade($student1), $predmet->getStudentGrade($student2), $predmet2->getStudentGrade($student1), $predmet2->getStudentGrade($student2));
 $gradeStatistics = calculateGradeStatistics($grades);
 echo "<br>";
 echo "Najveća ocena: " . $gradeStatistics[0] . "<br>";
@@ -143,8 +143,8 @@ echo "Najmanja ocena: " . $gradeStatistics[1] . "<br>";
 echo "Prosečna ocena: " . $gradeStatistics[2] . "<br>";
 echo "<br>";
 echo "ID studenata koji su položili: " . implode(", ", $predmet->getPassingStudents()) . "<br>";
-echo "Prosečna ocena za " . $predmet->getName(). " je: " . $predmet->calculateAverageGrade() . "<br>";
-echo "Prosečna ocena za " . $predmet2->getName(). " je: " . $predmet2->calculateAverageGrade();
+echo "Prosečna ocena za " . $predmet->getName() . " je: " . $predmet->calculateAverageGrade() . "<br>";
+echo "Prosečna ocena za " . $predmet2->getName() . " je: " . $predmet2->calculateAverageGrade();
 
 // Prikaz podataka o studentu i oceni na HTML strani
 echo "<h1>Student Information</h1>";
