@@ -136,9 +136,9 @@ $student1 = new MasterStudent("Marko", "Radovanović", "1", "Napredno PHP progra
 $student2 = new MasterStudent("Bojana", "Modrić", "2", "Rimsko pravo");
 
 $predmet->addStudentGrade($student1, 10);
-$predmet->addStudentGrade($student2, 7);
+$predmet->addStudentGrade($student2, 6);
 $predmet2->addStudentGrade($student1, 10);
-$predmet2->addStudentGrade($student2, 6);
+$predmet2->addStudentGrade($student2, 5);
 $studentList = array($student1, $student2);
 studentList($studentList);
 
