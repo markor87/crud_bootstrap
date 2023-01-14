@@ -2,19 +2,21 @@
 
 interface StudentData
 {
-    public function getStudentName();
-
-    public function getStudentID();
+//    public function getStudentName();
+//
+//    public function getStudentID();
 }
 
 abstract class Student implements StudentData
 {
     private $name;
+    private $lastname;
     private $id;
 
-    public function __construct($name, $id)
+    public function __construct($name, $lastname, $id)
     {
         $this->name = $name;
+        $this->lastname = $lastname;
         $this->id = $id;
     }
 
@@ -23,9 +25,39 @@ abstract class Student implements StudentData
         return $this->name;
     }
 
+    public function getStudentLastName()
+    {
+        return $this->lastname;
+    }
+
     public function getStudentID()
     {
         return $this->id;
+    }
+}
+
+trait PredmetIzracunavanje
+{
+    public function calculateAverageGrade()
+    {
+        $sum = 0;
+        $count = 0;
+        foreach ($this->grades as $grade) {
+            $sum += $grade;
+            $count++;
+        }
+        return $sum / $count;
+    }
+
+    public function getPassingStudents()
+    {
+        $passingStudents = array();
+        foreach ($this->grades as $studentID => $grade) {
+            if (Predmet::isGradePassing($grade)) {
+                $passingStudents[] = $studentID;
+            }
+        }
+        return $passingStudents;
     }
 }
 
@@ -64,38 +96,13 @@ class Predmet
     }
 }
 
-trait PredmetIzracunavanje
-{
-    public function calculateAverageGrade()
-    {
-        $sum = 0;
-        $count = 0;
-        foreach ($this->grades as $grade) {
-            $sum += $grade;
-            $count++;
-        }
-        return $sum / $count;
-    }
-
-    public function getPassingStudents()
-    {
-        $passingStudents = array();
-        foreach ($this->grades as $studentID => $grade) {
-            if (Predmet::isGradePassing($grade)) {
-                $passingStudents[] = $studentID;
-            }
-        }
-        return $passingStudents;
-    }
-}
-
 class MasterStudent extends Student
 {
     private $masterThesis;
 
-    public function __construct($name, $id, $masterThesis)
+    public function __construct($name, $lastname, $id, $masterThesis)
     {
-        parent::__construct($name, $id);
+        parent::__construct($name, $lastname, $id);
         $this->masterThesis = $masterThesis;
     }
 
@@ -109,7 +116,7 @@ class MasterStudent extends Student
 function studentList($arr)
 {
     foreach ($arr as $student) {
-        echo "Student ID: " . $student->getStudentID() . " Name: " . $student->getStudentName() . "<br>";
+        echo "Student ID: " . $student->getStudentID() . "; " . " Ime: " . $student->getStudentName() . "; " . " Prezime: " . $student->getStudentLastName() . "<br>";
     }
 }
 
@@ -125,8 +132,8 @@ function calculateGradeStatistics($arr)
 // Primer korišćenja klasa
 $predmet = new Predmet("Programiranje");
 $predmet2 = new Predmet("Pravo");
-$student1 = new MasterStudent("Marko", "1", "Napredno PHP programiranje");
-$student2 = new MasterStudent("Bojana", "2", "Rimsko pravo");
+$student1 = new MasterStudent("Marko", "Radovanović", "1", "Napredno PHP programiranje");
+$student2 = new MasterStudent("Bojana", "Modrić", "2", "Rimsko pravo");
 
 $predmet->addStudentGrade($student1, 10);
 $predmet->addStudentGrade($student2, 7);
@@ -149,12 +156,14 @@ echo "Prosečna ocena za " . $predmet2->getName() . " je: " . $predmet2->calcula
 // Prikaz podataka o studentu i oceni na HTML strani
 echo "<h1>Informacije o studentu</h1>";
 echo "Ime: " . $student1->getStudentName() . "<br>";
+echo "Prezime: " . $student1->getStudentLastName() . "<br>";
 echo "Student ID: " . $student1->getStudentID() . "<br>";
 echo "Master teza: " . $student1->getMasterThesis() . "<br>";
 echo "Predmet: " . $predmet->getName() . "<br>";
 echo "Ocena: " . $predmet->getStudentGrade($student1) . "<br>";
 echo "<br>";
 echo "Ime: " . $student2->getStudentName() . "<br>";
+echo "Prezime: " . $student2->getStudentLastName() . "<br>";
 echo "Student ID: " . $student2->getStudentID() . "<br>";
 echo "Master teza: " . $student2->getMasterThesis() . "<br>";
 echo "Predmet: " . $predmet2->getName() . "<br>";

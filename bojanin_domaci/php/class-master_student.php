@@ -5,9 +5,9 @@ class MasterStudent extends Student
 {
     private $masterThesis;
 
-    public function __construct($name, $id, $masterThesis)
+    public function __construct($name, $lastname, $id, $masterThesis)
     {
-        parent::__construct($name, $id);
+        parent::__construct($name, $lastname, $id);
         $this->masterThesis = $masterThesis;
     }
 
