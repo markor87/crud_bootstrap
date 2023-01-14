@@ -30,7 +30,7 @@ echo "Prosečna ocena za " . $predmet->getName(). " je: " . $predmet->calculateA
 echo "Prosečna ocena za " . $predmet2->getName(). " je: " . $predmet2->calculateAverageGrade();
 
 // Prikaz podataka o studentu i oceni na HTML strani
-echo "<h1>Student Information</h1>";
+echo "<h1>Informacije o studentu</h1>";
 echo "Ime: " . $student1->getStudentName() . "<br>";
 echo "Student ID: " . $student1->getStudentID() . "<br>";
 echo "Master teza: " . $student1->getMasterThesis() . "<br>";
