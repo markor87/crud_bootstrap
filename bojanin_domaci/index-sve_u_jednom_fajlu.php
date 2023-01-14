@@ -35,7 +35,7 @@ class Predmet
 
     private $name;
     private $grades;
-    private static $minPassingGrade = 4;
+    private static $minPassingGrade = 6;
 
     public function __construct($name)
     {
