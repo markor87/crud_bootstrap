@@ -1,48 +1,44 @@
 <?php
-include "php/classes/db_connection.php";
+require_once dirname(__DIR__). "/classes/db_connection.php";
+class Validation {
+    private $errors = array();
+    private $conn;
 
-class Login {
-    private $username;
-    private $password;
-    private $db;
-
-    public function __construct($username, $password, $db) {
-        $this->username = $username;
-        $this->password = $password;
-        $this->db = $db;
+    public function __construct() {
+        $database = new Database();
+        $this->conn = $database->connect();
     }
 
-    public function validate() {
-        if (empty($this->username) || empty($this->password)) {
-            return "Please enter a username and password.";
+    public function validateEmail($email) {
+        if (empty($email)) {
+            $this->errors['email'] = "Email field is required";
+        } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->errors['email'] = "Invalid email format";
         }
+    }
 
-        if (!preg_match("/^[a-zA-Z0-9]+$/", $this->username)) {
-            return "Invalid username. Only letters and numbers are allowed.";
+    public function validatePassword($password) {
+        if (empty($password)) {
+            $this->errors['password'] = "Password field is required";
+        } else if (strlen($password) < 8) {
+            $this->errors['password'] = "Password must be at least 8 Fcharacters long";
         }
-
-        if (strlen($this->password) < 8) {
-            return "Invalid password. Must be at least 8 characters.";
+    }
+    public function checkUser($email, $password) {
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ? AND password = ?");
+        $stmt->execute([$email, $password]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$user) {
+            $this->errors['user'] = "Incorrect email or password";
         }
-
-        // check against database if user exist with provided credentials
-        $password = md5($this->password);
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
-        $stmt->bind_param("ss", $this->username, $password);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows === 0) {
-            return "Invalid username or password.";
+    }
+    public function validate($email, $password) {
+        $this->validateEmail($email);
+        $this->validatePassword($password);
+        if(empty($this->errors)){
+            $this->checkUser($email, $password);
         }
-
-        // start a session
-        session_start();
-        $_SESSION['username'] = $this->username;
-
-        // redirect user to index.php
-        header("Location: index.php");
-        exit;
-
+        return $this->errors;
     }
 }
+
