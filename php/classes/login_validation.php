@@ -1,5 +1,5 @@
 <?php
-include "php/classes/db.php";
+include "php/classes/db_connection.php";
 
 class Login {
     private $username;
