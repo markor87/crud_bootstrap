@@ -1,3 +1,10 @@
+<?php
+require_once 'php/classes/db_connection.php';
+
+$db=new Database();
+$rows=$db->select("select ime, prezime from studenti");
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -285,7 +292,7 @@
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
 <script>
-    // Select all of the rows in the table
+    // Select all the rows in the table
     const rows = document.querySelectorAll('table tbody tr');
 
     // Get the number of rows and update the rowCount element

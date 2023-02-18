@@ -1,21 +1,35 @@
 <?php
+
 class Database {
-    private $host = '10.15.32.49';
-    private $user = 'marko.radovanovic';
-    private $password = 'LoneDruid1987';
-    private $dbname = 'izvrsioci';
+    private $host = 'localhost';
+    private $username = 'root';
+    private $password = '';
+    private $database = 'fakultet';
+
     private $conn;
 
-    public function connect() {
-        $this->conn = null;
+    public function __construct() {
+        $this->conn = new mysqli($this->host, $this->username, $this->password, $this->database);
 
-        try {
-            $this->conn = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->dbname, $this->user, $this->password);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch(PDOException $e) {
-            echo 'Connection Error: ' . $e->getMessage();
+        if ($this->conn->connect_error) {
+            die('Connection failed: ' . $this->conn->connect_error);
+        }
+    }
+
+    public function select($sql) {
+        $result = $this->conn->query($sql);
+        $rows = [];
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
         }
 
-        return $this->conn;
+        return $rows;
+    }
+
+    public function __destruct() {
+        $this->conn->close();
     }
 }
