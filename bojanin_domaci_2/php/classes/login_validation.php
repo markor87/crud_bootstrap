@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__DIR__). "/classes/db_connection.php";
+require_once dirname(__DIR__) . "/classes/db_connection.php";
 class Validation {
     private $errors = array();
     private $conn;
