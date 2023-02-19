@@ -1,8 +1,8 @@
 <?php
 require_once 'php/classes/db_connection.php';
 
-$db=new Database();
-$rows=$db->select("select ime, prezime from studenti");
+$db = new Database();
+$rows = $db->select("select id, ime, prezime from studenti");
 ?>
 
 <!doctype html>
@@ -91,10 +91,11 @@ $rows=$db->select("select ime, prezime from studenti");
 <div class="container mt-5">
     <div class="row">
         <div class="col-12">
-            <!-- Add and read buttons above the table -->
+            <!-- Add button above the table -->
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add</button>
-                <!--        <button class="btn btn-secondary" data-toggle="modal" data-target="#readModal">Read</button>-->
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add
+                </button>
+
                 <!-- Counter that counts how many rows are in the table -->
                 <div class="text-right mt-3">
                     <span>Rows:</span>
@@ -107,51 +108,35 @@ $rows=$db->select("select ime, prezime from studenti");
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Column 1</th>
-                    <th scope="col">Column 2</th>
-                    <th scope="col">Column 3</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Ime</th>
+                    <th scope="col">Prezime</th>
+                    <th scope="col">Akcija</th>
                 </tr>
                 </thead>
                 <tbody>
                 <!-- Table rows -->
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Value 1</td>
-                    <td>Value 2</td>
-                    <td>Value 3</td>
-                    <td>
-                        <!-- CRUD options -->
-                        <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#readModal">Read
-                        </button>
-                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal">Edit
-                        </button>
-                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Value 1</td>
-                  <td>Value 2</td>
-                  <td>Value 3</td>
-                  <td>
-                    <!-- CRUD options -->
-                    <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#readModal">Read
-                    </button>
-                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal">Edit
-                    </button>
-                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete
-                    </button>
-                  </td>
-                </tr>
+                <?php foreach ($rows as $row) : ?>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td><?= $row['id'] ?></td>
+                        <td><?= $row['ime'] ?></td>
+                        <td><?= $row['prezime'] ?></td>
+                        <td>
+                            <!-- CRUD options -->
+                            <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#readModal">Read
+                            </button>
+                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal">Edit
+                            </button>
+                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete
+                            </button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+
                 </tbody>
             </table>
-            <!-- Counter that counts how many rows are in the table -->
-<!--            <div class="text-right mt-3">-->
-<!--                <span>Rows:</span>-->
-<!--                <span class="badge badge-secondary">0</span>-->
-<!--            </div>-->
+
         </div>
     </div>
 </div>
@@ -171,22 +156,22 @@ $rows=$db->select("select ime, prezime from studenti");
                 <!-- Form for adding a new row -->
                 <form>
                     <div class="form-group">
-                        <label for="addColumn1Input">Column 1</label>
+                        <label for="addColumn1Input">Ime</label>
                         <input type="text" class="form-control" id="addColumn1Input">
                     </div>
                     <div class="form-group">
-                        <label for="addColumn2Input">Column 2</label>
+                        <label for="addColumn2Input">Prezime</label>
                         <input type="text" class="form-control" id="addColumn2Input">
                     </div>
-                    <div class="form-group">
-                        <label for="addColumn3Input">Column 3</label>
-                        <input type="text" class="form-control" id="addColumn3Input">
-                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <label for="addColumn3Input">Column 3</label>-->
+<!--                        <input type="text" class="form-control" id="addColumn3Input">-->
+<!--                    </div>-->
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="addStudentBtn">Save</button>
             </div>
         </div>
     </div>
