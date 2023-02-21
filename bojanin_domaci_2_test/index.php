@@ -1,9 +1,36 @@
 <?php
+//Adding data
 require_once 'php/classes/db_connection.php';
+require_once 'php/classes/AddData.php';
 
-$db = new Database();
-$rows = $db->select("select id, ime, prezime from studenti");
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $db = new DB();
+    $addData = new AddData($db->getConnection());
+
+    $ime = $_POST['ime'];
+    $prezime = $_POST['prezime'];
+
+    $rowCount = $addData->addData($ime, $prezime);
+
+    if ($rowCount > 0) {
+        echo "Data added successfully.";
+    } else {
+        echo "Error adding data.";
+    }
+}
+
 ?>
+
+<?php
+//Reading data
+require_once 'php/classes/ReadData.php';
+
+$db = new DB();
+$readData = new ReadData($db->getConnection());
+$data = $readData->readData();
+
+?>
+
 
 <!doctype html>
 <html lang="en">
@@ -104,7 +131,7 @@ $rows = $db->select("select id, ime, prezime from studenti");
                 </thead>
                 <tbody>
                 <!-- Table rows -->
-                <?php foreach ($rows as $row) : ?>
+                <?php foreach ($data as $row) : ?>
                     <tr>
                         <th scope="row">1</th>
                         <td><?= $row['id'] ?></td>
@@ -130,6 +157,7 @@ $rows = $db->select("select id, ime, prezime from studenti");
 </div>
 
 <!-- Modals for the CRUD options -->
+
 <!-- Add Modal -->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -142,24 +170,24 @@ $rows = $db->select("select id, ime, prezime from studenti");
             </div>
             <div class="modal-body">
                 <!-- Form for adding a new row -->
-                <form method="post">
+                <form method="post" action="php/classes/AddData.php">
                     <div class="form-group">
                         <label for="addColumn1Input">Ime</label>
-                        <input type="text" class="form-control" id="addColumn1Input" placeholder="Unesite ime">
+                        <input type="text" class="form-control" id="addColumn1Input" placeholder="Unesite ime" name="ime">
                     </div>
                     <div class="form-group">
                         <label for="addColumn2Input">Prezime</label>
-                        <input type="text" class="form-control" id="addColumn2Input" placeholder="Unesite prezime">
+                        <input type="text" class="form-control" id="addColumn2Input" placeholder="Unesite prezime" name="prezime">
                     </div>
-<!--                    <div class="form-group">-->
-<!--                        <label for="addColumn3Input">Column 3</label>-->
-<!--                        <input type="text" class="form-control" id="addColumn3Input">-->
-<!--                    </div>-->
+                    <!--                    <div class="form-group">-->
+                    <!--                        <label for="addColumn3Input">Column 3</label>-->
+                    <!--                        <input type="text" class="form-control" id="addColumn3Input">-->
+                    <!--                    </div>-->
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="addStudentBtn">Save</button>
+                <button type="submit" class="btn btn-primary" id="addStudentBtn">Save</button>
             </div>
         </div>
     </div>
