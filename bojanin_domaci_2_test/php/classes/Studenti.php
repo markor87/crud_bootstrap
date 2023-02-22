@@ -1,38 +1,44 @@
 <?php
 require_once('db_connection.php');
 
-class User {
+class Student
+{
     private $conn;
 
-    public function __construct(){
-        $this->conn = (new DB())->conn;
+    public function __construct()
+    {
+        $this->conn = (new Database())->conn;
     }
 
-    public function create($name, $email, $phone){
-        $stmt = $this->conn->prepare("INSERT INTO users (name, email, phone) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $name, $email, $phone);
+    public function create($ime, $prezime, $email, $telefon)
+    {
+        $stmt = $this->conn->prepare("INSERT INTO studenti (ime, prezime, email, telefon) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("sss", $ime, $prezime, $email, $telefon);
         return $stmt->execute();
     }
 
-    public function read(){
-        $result = $this->conn->query("SELECT * FROM users ORDER BY id DESC");
+    public function read()
+    {
+        $result = $this->conn->query("SELECT id, ime, prezime, email, telefon FROM studenti ORDER BY id");
         $rows = array();
 
-        while($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
             $rows[] = $row;
         }
 
         return $rows;
     }
 
-    public function update($id, $name, $email, $phone){
-        $stmt = $this->conn->prepare("UPDATE users SET name=?, email=?, phone=? WHERE id=?");
-        $stmt->bind_param("sssi", $name, $email, $phone, $id);
+    public function update($ime, $prezime, $email, $telefon)
+    {
+        $stmt = $this->conn->prepare("UPDATE studenti SET ime=?, prezime=?, email=?, telefon=? WHERE id=?");
+        $stmt->bind_param("sssi", $ime, $prezime, $telefon, $email, $id);
         return $stmt->execute();
     }
 
-    public function delete($id){
-        $stmt = $this->conn->prepare("DELETE FROM users WHERE id=?");
+    public function delete($id)
+    {
+        $stmt = $this->conn->prepare("DELETE FROM studenti WHERE id=?");
         $stmt->bind_param("i", $id);
         return $stmt->execute();
     }

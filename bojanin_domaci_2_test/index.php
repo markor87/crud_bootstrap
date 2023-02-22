@@ -1,36 +1,25 @@
 <?php
-//Adding data
-require_once 'php/classes/db_connection.php';
-require_once 'php/classes/AddData.php';
+require_once('php/classes/Studenti.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $db = new DB();
-    $addData = new AddData($db->getConnection());
+$student = new Student();
 
-    $ime = $_POST['ime'];
-    $prezime = $_POST['prezime'];
-
-    $rowCount = $addData->addData($ime, $prezime);
-
-    if ($rowCount > 0) {
-        echo "Data added successfully.";
-    } else {
-        echo "Error adding data.";
-    }
+if (isset($_POST['create'])) {
+    $student->create($_POST['ime'], $_POST['prezime'], $_POST['email'], $_POST['telefon']);
+    header('Location: index.php');
 }
 
+if (isset($_POST['update'])) {
+    $student->update($_POST['ime'], $_POST['prezime'], $_POST['email'], $_POST['telefon']);
+    header('Location: index.php');
+}
+
+if (isset($_POST['delete'])) {
+    $student->delete($_POST['id']);
+    header('Location: index.php');
+}
+
+$studenti = $student->read();
 ?>
-
-<?php
-//Reading data
-require_once 'php/classes/ReadData.php';
-
-$db = new DB();
-$readData = new ReadData($db->getConnection());
-$data = $readData->readData();
-
-?>
-
 
 <!doctype html>
 <html lang="en">
@@ -126,24 +115,28 @@ $data = $readData->readData();
                     <th scope="col">Id</th>
                     <th scope="col">Ime</th>
                     <th scope="col">Prezime</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Telefon</th>
                     <th scope="col">Akcija</th>
                 </tr>
                 </thead>
                 <tbody>
                 <!-- Table rows -->
-                <?php foreach ($data as $row) : ?>
+                <?php foreach ($studenti as $student) : ?>
                     <tr>
                         <th scope="row">1</th>
-                        <td><?= $row['id'] ?></td>
-                        <td><?= $row['ime'] ?></td>
-                        <td><?= $row['prezime'] ?></td>
+                        <td><?= $student['id'] ?></td>
+                        <td><?= $student['ime'] ?></td>
+                        <td><?= $student['prezime'] ?></td>
+                        <td><?= $student['email'] ?></td>
+                        <td><?= $student['telefon'] ?></td>
                         <td>
                             <!-- CRUD options -->
                             <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#readModal">Read
                             </button>
                             <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal">Edit
                             </button>
-                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete
+                            <button class="btn btn-danger btn-sm delete-btn" data-toggle="modal" data-target="#deleteModal">Delete
                             </button>
                         </td>
                     </tr>
@@ -170,24 +163,30 @@ $data = $readData->readData();
             </div>
             <div class="modal-body">
                 <!-- Form for adding a new row -->
-                <form method="post" action="php/classes/AddData.php">
+                <form method="post">
                     <div class="form-group">
-                        <label for="addColumn1Input">Ime</label>
-                        <input type="text" class="form-control" id="addColumn1Input" placeholder="Unesite ime" name="ime">
+                        <label for="ime">Ime</label>
+                        <input type="text" class="form-control" id="ime" placeholder="Unesite ime" name="ime">
                     </div>
                     <div class="form-group">
-                        <label for="addColumn2Input">Prezime</label>
-                        <input type="text" class="form-control" id="addColumn2Input" placeholder="Unesite prezime" name="prezime">
+                        <label for="prezime">Prezime</label>
+                        <input type="text" class="form-control" id="prezime" placeholder="Unesite prezime"
+                               name="prezime">
                     </div>
-                    <!--                    <div class="form-group">-->
-                    <!--                        <label for="addColumn3Input">Column 3</label>-->
-                    <!--                        <input type="text" class="form-control" id="addColumn3Input">-->
-                    <!--                    </div>-->
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Unesite prezime" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefon">Telefon</label>
+                        <input type="text" class="form-control" id="telefon" placeholder="Unesite prezime"
+                               name="telefon">
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" id="addStudentBtn">Save</button>
+                <button type="submit" class="btn btn-primary" id="addStudentBtn" name="create">Save</button>
             </div>
         </div>
     </div>
@@ -298,6 +297,25 @@ $data = $readData->readData();
 
     // Get the number of rows and update the rowCount element
     document.getElementById('rowCount').innerHTML = rows.length;
+</script>
+<script>
+    $(document).on("click", ".edit-btn", function () {
+        var id = $(this).data('id');
+        var ime = $(this).data('ime');
+        var prezime = $(this).data('prezime');
+        var email = $(this).data('email');
+        var telefon = $(this).data('telefon');
+        $("#editModal #id").val(id);
+        $("#editModal #ime").val(ime);
+        $("#editModal #prezime").val(prezime);
+        $("#editModal #email").val(email);
+        $("#editModal #telefon").val(telefon);
+    });
+
+    $(document).on("click", ".delete-btn", function () {
+        var id = $(this).data('id');
+        $("#deleteModal #id").val(id);
+    });
 </script>
 </body>
 </html>

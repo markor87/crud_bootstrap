@@ -1,9 +1,9 @@
 <?php
-class DB {
+class Database {
     private $host = "localhost";
-    private $username = "username";
-    private $password = "password";
-    private $database = "database";
+    private $username = "root";
+    private $password = "";
+    private $database = "fakultet";
     public $conn;
 
     public function __construct(){
